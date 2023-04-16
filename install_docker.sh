@@ -7,6 +7,7 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 apt-get update
 apt-get install -y docker-ce
 
+sed 's/^ExecStart.*/& --mtu=1450/' -i /lib/systemd/system/docker.service
 cat <<EOF | sudo tee /etc/docker/daemon.json
 {
   "exec-opts": ["native.cgroupdriver=systemd"]
